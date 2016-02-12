@@ -40,10 +40,12 @@ U = randn(Q, params.nVoxels);
 U = bsxfun(@times, scales, U);
 
 if params.Cauchy
-    Y = Z * U + randn(N, params.nVoxels) * (1 - params.Cauchy) + trnd(1, N, params.nVoxels) * params.Cauchy;
+    noise = randn(N, params.nVoxels) * (1 - params.Cauchy) + trnd(1, N, params.nVoxels) * params.Cauchy;
 else
-    Y = Z * U + randn(N, params.nVoxels);
+    noise = randn(N, params.nVoxels);
 end
+
+Y = Z * U + noise * params.sigmaNoise;
 
 
 function B = to_vec(A)
