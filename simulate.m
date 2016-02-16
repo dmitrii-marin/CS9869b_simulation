@@ -1,4 +1,4 @@
-function [ Y ] = simulate(varargin)
+function [ Y, U ] = simulate(varargin)
 %SIMULATE 
 
 p = inputParser;
@@ -31,10 +31,10 @@ Z = [repmat([Cond Inter], params.nRuns, 1) Runs];
 [N, Q] = size(Z);
 
 scales = ...
-    [ones(3,1) * params.sigmaS
-     ones(3,1) * params.sigmaT
-     ones(9,1) * params.sigmaInt
-     ones(params.nRuns,1) * params.sigmaRun];
+    [ones(3,1) .* params.sigmaS
+     ones(3,1) .* params.sigmaT
+     ones(9,1) .* params.sigmaInt
+     ones(params.nRuns,1) .* params.sigmaRun];
 
 U = randn(Q, params.nVoxels);
 U = bsxfun(@times, scales, U);
