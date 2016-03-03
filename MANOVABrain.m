@@ -1,5 +1,5 @@
 %--------------------------------------------------------------------------------------------------------
-%% Function implementing MANOVA
+%% Function implementing MANOVA in Allefeld(2014)
 % Y: the data consist of N trials across P voxels
 % C: the constrast matrix
 %--------------------------------------------------------------------------------------------------------
