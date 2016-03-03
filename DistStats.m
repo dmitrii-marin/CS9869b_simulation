@@ -3,6 +3,9 @@
 % Nsim: the number of simulations
 % C: the constrast matrix
 % f: the function computing the test statistic
+% sigmanoise: In fact, this parameter does not influence the distribution
+% of the test statistic
+% nVoxel: number of voxels
 %--------------------------------------------------------------------------------------------------------
 
 function EmpiricalDist = DistStats(Nsim,C,f,...
