@@ -4,6 +4,8 @@
 %Z: N by K design matrix, specifying K conditions at N different time points
 %U: K by P true activity patterns, specifying the activity patterns at different condition K in P voxels
 %Default setting: R=6, N=R*3^2=54, P=160, K=3+3+9=15 
+%The CVMANOVA used searchlight methods and he set the number of voxels
+%small because MANOVA/CVMANOVA requires N>P
 %--------------------------------------------------------------------------------------------------------
 
 function [ Y, Z, U ] = simulate(varargin)
