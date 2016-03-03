@@ -28,7 +28,7 @@ function  tpower = TestPower(varargin)
     
     for i = 1:params.Nsim
         Y = simulate(params.sigmaS,params.sigmaT,params.sigmaInt,params.sigmaRun,...
-            'nVoxels', params.nVoxels); %Generate the data under the alternative distribution
+            'nVoxels', params.nVoxels,'sigmaNoise',params.sigmaNoise); %Generate the data under the alternative distribution
 %       Y = simulate(0,0,0,0,...
 %           'nVoxels', params.nVoxels,'sigmaNoise',1); %Generate the data under the null distribution
         T_BLH = params.f(Y,params.C);      
