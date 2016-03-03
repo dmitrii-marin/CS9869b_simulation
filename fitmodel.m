@@ -60,3 +60,12 @@ figure
 histogram(DistCVT_BLH2)
 figure
 histogram(DistCVT_BLH3)
+
+
+%Test power given type I error alpha=0.05
+%Testing H0:random noise v.s. H1:Spatial patterns
+P1 = TestPower(1,0,0,0,...
+               'Nsim',1000,'C',CS,'f',@MANOVABrain,'sigmaNoise', 4,'nVoxels', 20); 
+
+P2 = TestPower(1,0,0,0,...
+               'Nsim',1000,'C',CS,'f',@CVMANOVABrain,'sigmaNoise', 4,'nVoxels', 20); 
