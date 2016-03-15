@@ -30,10 +30,20 @@ for i = 1:length(p)
     axis square
     Color(i,:) = caxis;
     
-    subplot(4,4,i*4+1);
+    
     C = Cont{i};
     Hyp{i} = C'*pinv(C');
-    imagesc(Hyp{i});
+end
+impixelinfo;
+
+X = cell2mat(cellfun(@(A) A(:), Hyp, 'UniformOutput', false));
+X = [X ones(size(X, 1), 1)];
+Z = inv(X'*X)*X';
+
+for i = 1:length(p)
+   
+    subplot(4,4,i*4+1);
+    imagesc(reshape(Z(i,:), 9,9));
 %     colorbar;
     title(p{i});
     axis square
@@ -50,7 +60,7 @@ end
 for i=1:3
     for j=1:3
         subplot(4,4, 1 + i + j*4);
-        text(0,0,sprintf('%g', Hyp{i}(:)'*RSA{j}(:)), 'HorizontalAlignment','center');
+        text(0,0,sprintf('%g', Z(i,:)*RSA{j}(:)), 'HorizontalAlignment','center');
         xlim([-1 1]);
         ylim([-1 1]);
         axis off
@@ -60,7 +70,7 @@ end
 drawnow;
 
 %% H0
-Trials = 10000;
+Trials = 1000;
 H1 = 1;
 fprintf('Simulating H0...');
 A = tic;
@@ -115,5 +125,3 @@ Leg = [Leg sprintf('%g/%.2f', noise, Power)];
 legend(Leg);
 drawnow;
 end
-
-
