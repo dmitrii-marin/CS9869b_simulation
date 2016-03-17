@@ -1,26 +1,41 @@
-function [pred, beta, out] = h_test_pattern(nBoot)
+function [p, stats, beta] = h_test_pattern(sim,nBoot)
+%% Simulate pattern component model
 
+
+%% data param
 nCond = 9;
 nRun = 6;
 nVx = 160;
 
-out = cell(1,nBoot);
-model = zeros(nBoot,3);
-beta = zeros(nBoot,3);
+%% set contrast matrix
+c1 = [... %main effect 1
+    1 1 1  -1 -1 -1  0 0 0; ...
+    0 0 0  1 1 1  -1 -1 -1];
+m1 = c1'*pinv(c1');
 
+c2 = [... %main effect 2
+    1 -1 0  1 -1 0  1 -1 0; ...
+    0 1 -1  0 1 -1  0 1 -1];
+m2 = c2'*pinv(c2');
+
+intr = eye(9);%interaction
+
+conMx = [m1(:), m2(:), intr(:)]; %combine into contrast matrix
+
+%% pre-allocate
+beta = zeros(nBoot, size(conMx,2));
+
+%% Run simulations
 for i = 1:nBoot
     
-    dat = d_sim(.05,0,0,0,'sigmaNoise',1,'Cauchy', 0);
+    dat = simulate(sim(1),sim(2),sim(3),'sigmaNoise',1,'Cauchy', 0);
     dat = permute(reshape(dat, [nCond,nRun,nVx]), [1, 3, 2]);
     
-    [out{i},bet] = h_pattern_comp(dat);
-    model(i,:) = out{i}.inmodel;    
-    beta(i,:) = bet(1:3,:);
+    beta(i,:) = h_pattern_comp(dat,conMx);   
     
 end
 
-pred = mean(model);
-
-
+%% return p and stats
+[~,p,~,stats] = ttest(beta,0);
 
 end
