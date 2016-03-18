@@ -1,25 +1,25 @@
 %% Example of the simple MANOVA
 %Only the interaction
-[ Y, Z0, U0 ]  = simulate(0,0,0.3,0,...
+[ Y, Z0, U0 ]  = simulate(0,0.3,0,0,...
                            'sigmaNoise', 1,'nVoxels', 30); 
 
 
 [T_Wilks,FT_Wilks,df1,df2,pF_Wilks] = myMANOVABrain(Y)
 
-%False positive rate or Power
-N = 1000;
-ListpF_Wilks = zeros(N,4);
-for i = 1:N
+%% False positive rate or Power
+Nrep = 1000;
+ListpF_Wilks = zeros(Nrep,4);
+for i = 1:Nrep
     %False positive rate
 %     [ Y, Z0, U0 ]  = simulate(0,0,0,0,...
 %                            'sigmaNoise', 1,'nVoxels', 40); 
 %     [ Y, Z0, U0 ]  = simulate(0,0,0,0,...
 %                            'sigmaNoise', 1,'nVoxels', 160); 
     %Power
-    [ Y, Z0, U0 ]  = simulate(0,0,0.5,0,...
-                           'sigmaNoise', 1,'nVoxels', 40);
+    [ Y, Z0, U0 ]  = simulate(0,0,0.4,0,...
+                           'sigmaNoise', 1,'nVoxels', 160);
 %     [ Y, Z0, U0 ]  = simulate(0,0,0.5,0,...
-%                            'sigmaNoise', 1,'nVoxels', 40); 
+%                            'sigmaNoise', 1,'nVoxels', 30); 
 
     [T_Wilks,FT_Wilks,df1,df2,pF_Wilks] = myMANOVABrain(Y);
     ListpF_Wilks(i,:) = pF_Wilks;

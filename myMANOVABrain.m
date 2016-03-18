@@ -1,7 +1,7 @@
 %--------------------------------------------------------------------------------------------------------
 %% Function implementing MANOVA for testing the full model: 
 %% the Intercept, main effects and the interaction.
-%% When N <= p, use first 95% principal component as the response
+%% When (N-g) < p, use first 95% principal component as the response
 %% Ref: Krzanowski, W. J. (1988) Principles of Multivariate Analysis. A User's Perspective. Oxford.
 % Y: the data consist of N trials across P voxels
 % T_Wilks: Wilk's Lambda statistics
@@ -9,19 +9,20 @@
 %--------------------------------------------------------------------------------------------------------
 function [T_Wilks,F_Wilks,df1,df2,pF_Wilks] = myMANOVABrain(Y)
     [N,p] = size(Y);
-    
-    if N <= p
+    g = 9; %the number of conditions
+    if (N-g) < p
 %         disp('-------------------------------------------');
 %         disp('N<=p, 95% Pricipal components are used!');
 %         disp('-------------------------------------------');
         [COEFF,SCORE,latent] = princomp(Y,'econ');
         latentProp = cumsum(latent)./sum(latent);
         ncomp = find(latentProp>0.95);
-        Y = SCORE(:,1:ncomp(1));
+        ncomp = ncomp(1);
+%        ncomp = min([ncomp(1),N-g]);
+       Y = SCORE(:,1:ncomp);
         [N,p] = size(Y);
     end
     
-    g = 9; %the number of conditions
     Afull = eye(g); %Hypothesis matrix within subjects
     Afull = {Afull(1,:); Afull(2:3,:) ;Afull(4:5,:) ;Afull(6:9,:)};
     C = eye(p); %%Hypothesis matrix between subjects
@@ -44,7 +45,8 @@ function [T_Wilks,F_Wilks,df1,df2,pF_Wilks] = myMANOVABrain(Y)
     X  = repmat(Cond, 6, 1);
 
     %Fit the model using OLS (Equivalent to fitting a model for each pixel)
-    Bhat = (X'*X)\X'*Y;
+%    Bhat = (X'*X)\X'*Y;
+    Bhat = pinv(X)*Y;
     R = Y-X*Bhat; %Residual matrix
     E = C'*(R'*R)*C;
     
