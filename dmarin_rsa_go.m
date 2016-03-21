@@ -28,6 +28,7 @@ for i = 1:length(p)
 %     colorbar
     title(['\sigma_{' p{i} '} = 1']);
     axis square
+    axis off
     Color(i,:) = caxis;
     
     
@@ -47,6 +48,7 @@ for i = 1:length(p)
 %     colorbar;
     title(p{i});
     axis square
+    axis off
 end
 impixelinfo;
 
@@ -74,71 +76,23 @@ Trials = 1000;
 
 Levels = [0 0.05 0.1 0.15];
 [Ss,Ts,Ints] = ndgrid(1:length(Levels), 1:length(Levels), 1:length(Levels));
-for i=1:length(Ss)
+Sample = {};
+parfor i=1:numel(Ss)
     S = Ss(i);
     T = Ts(i);
     Int = Ints(i);
-    for T = 1:length(Levels)
-        for Int = 1:length(Levels)
-            for W = 1:length(Hyp)
-                fprintf('Simulating (S=%g, T=%g, I=%g)', S, T, Int);
-                A = tic;
-                Sample{S,T,Int,W} = dmarin_dist_stat(Trials, @(Y) dmarin_rsa(Y, Hyp{W}), Levels(S), Levels(T), Levels(Int), 'Cauchy', 0);
-                fprintf(' took %g s.\n', toc(A));
-                
-                Sample{S,T,Int,W} = sort(Sample{S,T,Int,W});
-% 
-%                 %% Estimate 5% critival value
-% 
-%                 figure(2);
-%                 [f0,xi0] = ksdensity(Sample0);
-%                 h = plot(xi0, f0);
-%                 set(h, 'LineWidth', 2);
-%                 [v,i] = max(f0);
-%                 % text(xi0(i), v, 'H0', 'Color', get(h, 'Color'), 'HorizontalAlignment', 'center', 'VerticalAlignment', 'bottom');
-%                 title('Estimated distributions [noise/power]');
-% 
-%                 Sample0 = sort(Sample0);
-%                 CValue5 = Sample0(ceil(0.95 * length(Sample0)));
-%                 line([CValue5 CValue5],get(gca,'YLim'),'Color', 'r')
-%                 % text(CValue5, get(gca,'YLim')*[0.1; 0.9], sprintf(' Critical\n value'));
-% 
-% 
-%                 Leg = { 'H0', 'Critical value' };
-%                 legend(Leg);
-% 
-%                 drawnow;
-%                 %% Estimate H1
-% 
-%                 for noise=[0.05 0.1 0.15]
-% 
-%                 fprintf('Simulating H1...');
-%                 A = tic;
-%                 Params = {0, 0, 0};
-%                 Params{H1} = noise;
-%                 Sample1 = dmarin_dist_stat(Trials, @(Y) dmarin_rsa(Y, Hyp{H1}), Params{:}, 'Cauchy', 0);
-%                 fprintf(' took %g s.\n', toc(A));
-% 
-%                 %% Estimate power
-% 
-%                 [f1,xi1] = ksdensity(Sample1);
-%                 hold on
-%                 h = plot(xi1, f1);
-%                 hold off
-% 
-%                 Power = nnz(Sample1 >= CValue5) / numel(Sample1);
-%                 % [v,i] = max(f1);
-%                 % text(xi1(i), v, sprintf('%g/%.2f', noise, Power), 'Color', get(h, 'Color'), 'HorizontalAlignment', 'center', 'VerticalAlignment', 'bottom');
-% 
-% 
-%                 %%
-%                 Leg = [Leg sprintf('%g/%.2f', noise, Power)];
-%                 legend(Leg);
-%                 drawnow;
-%                 end
-            end
-        end
+    SampleW = {};
+    for W = 1:length(Hyp)
+        fprintf('Simulating (S=%g, T=%g, I=%g, W=%g)', Levels([S, T, Int]), W);
+        A = tic;
+        SampleW{W} = dmarin_dist_stat(Trials, @(Y) dmarin_rsa(Y, Z(W,:)), Levels(S), Levels(T), Levels(Int), 'Cauchy', 0);
+        fprintf(' took %g s.\n', toc(A));
+
+        SampleW{W} = sort(SampleW{W});
     end
+    Sample = [Sample SampleW'];
 end
+
+Sample = reshape(length(Levels), length(Levels), length(Levels), length(Hyp));
 
 save sample Sample Levels Hyp
