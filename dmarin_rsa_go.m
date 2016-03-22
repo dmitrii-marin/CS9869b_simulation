@@ -77,6 +77,7 @@ Trials = 1000;
 Levels = [0 0.05 0.1 0.15];
 [Ss,Ts,Ints] = ndgrid(1:length(Levels), 1:length(Levels), 1:length(Levels));
 Sample = {};
+B = tic;
 parfor i=1:numel(Ss)
     S = Ss(i);
     T = Ts(i);
@@ -87,12 +88,12 @@ parfor i=1:numel(Ss)
         A = tic;
         SampleW{W} = dmarin_dist_stat(Trials, @(Y) dmarin_rsa(Y, Z(W,:)), Levels(S), Levels(T), Levels(Int), 'Cauchy', 0);
         fprintf(' took %g s.\n', toc(A));
-
         SampleW{W} = sort(SampleW{W});
     end
-    Sample = [Sample SampleW'];
+    Sample = [Sample; SampleW];
 end
+fprintf('Total simulation time is %g s\n', toc(B));
 
-Sample = reshape(length(Levels), length(Levels), length(Levels), length(Hyp));
+Sample = reshape(Sample, [length(Levels), length(Levels), length(Levels), length(Hyp)]);
 
-save sample Sample Levels Hyp
+save sample Sample Levels Hyp Z

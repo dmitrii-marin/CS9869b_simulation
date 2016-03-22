@@ -1,4 +1,8 @@
-load sample 
+function dmarin_power_est(dataFile)
+
+addpath ../UWO/Research
+
+load(dataFile);
 
 %% Power estimation
 
@@ -23,6 +27,7 @@ Markers = 'ov^s*';
 for W=1:length(Hyp)
     figure(W);
     clf
+    title(sprintf('Estimated distributions for regressor #%d', W));
     Legend = {};
     hold on
     L = [1 length(Levels)];
@@ -30,11 +35,24 @@ for W=1:length(Hyp)
         for T=L
             for Int=L
                 [y,x] = ksdensity(Sample{S,T,Int,W});
-                plot(x,y, ['-' Markers(Int)]);
-                Legend = [Legend sprintf('S=%g, T=%g, I=%g', Levels(S), Levels(T), Levels(Int))];
+                C = [S,T,Int];
+                plot(x,y, ['-' Markers(C(W))]);
+                Legend = [Legend sprintf('%d%d%d / Power=%g', (S), (T), (Int), Power(S,T,Int,W))];
             end
         end
     end
     hold off
     legend(Legend);
+    
+    pr(sprintf('%s_distributions_%d', dataFile, W));
+end
+
+%%
+
+figure;
+for i = 1:length(Levels)
+    [y,x] = ksdensity(Sample{i,1,1,1});
+    hold on
+    plot(x, y);
+    hold off
 end
