@@ -1,13 +1,14 @@
 %% Example of the simple CVMANOVA
 %Only the interaction
-[ Y, Z0, U0 ]  = simulate(0,0,0,0,...
-                           'sigmaNoise', 1,'nVoxels', 160); 
+[ Y, Z0, U0 ]  = simulate(0,0.3,0,0,...
+                           'sigmaNoise', 1,'nVoxels', 30); 
 
 
 [T_Wilks,FT_Wilks,df1,df2,pF_Wilks] = myMANOVABrain(Y);
-pF_Wilks;
-CVT_BLH = myCVMANOVABrain(Y)
+pF_Wilks
+CVT_BLH = myCVMANOVABrain(Y);
 pCVT_BLH = mean(bsxfun(@ge,NullDist,CVT_BLH)) %Run the section below first
+BootpCVT_BLH = mean(bsxfun(@ge,BootNullDist,CVT_BLH)) %Run the section below first
 
 %% False positive rate or Power
 Nrep = 1000;
@@ -31,10 +32,10 @@ end
 
 mean(ListpCVT_BLH(:,2:4)<0.05)
 
-%% Run this section to obtain the Null distribution first
+%% Run this section to obtain the Null distribution first from the simulations from NULL
 Nsim = 1000;
 NullDist = distCVMANOVA(Nsim,0,0,0,0,...
-                           'sigmaNoise', 1,'nVoxels', 160);
+                           'sigmaNoise', 1,'nVoxels', 30);
    
 %  median(NullDist(:,3))
 %  1.4826*mad(NullDist(:,3))     
@@ -57,3 +58,11 @@ histogram(NullDist(:,4))
 title('Interaction')
 
 close all
+
+%% Run this section to obtain the Null distribution first from using Permutation
+Nsim = 1000;
+BootNullDist = BootdistCVMANOVA(Y,Nsim);
+   
+%  median(NullDist(:,3))
+%  1.4826*mad(NullDist(:,3))     
+
