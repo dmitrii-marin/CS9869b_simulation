@@ -65,7 +65,8 @@ function CVT_BLH = myCVMANOVABrain(Y)
         BhatK = pinv(XK)*YK;
         RK = YK-XK*BhatK; %Residual matrix
         EL = C'*(RK'*RK)*C;    
-        EL =EL +eye(p)*trace(EL)*regularization/p; %Regularization 2
+        %EL =EL +eye(p)*trace(EL)*regularization/p; %Regularization 2
+        EL = diag(diag(EL)); %Regularization 2
         
         %Compute HL
         for i = 1:4  

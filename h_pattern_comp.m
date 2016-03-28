@@ -1,13 +1,13 @@
-function [beta] = h_pattern_comp(dat, conMx)
+function [beta] = h_pattern_comp(dat,conMx)
 %% take data and contrast matrix, retun betas
 
 
 %% Set Params
-%dat = d_sim(0.2,0,0,.5,'sigmaNoise',1);
 nCond = size(dat,1);
 nRun = size(dat,3);
 runs = 1:nRun;
-pairs = nchoosek(1:size(dat,1),2);
+
+pairs = nchoosek(1:size(dat,1),2); %condition pairs
 nPair = size(pairs,1);
 
 %% pre-allocate
@@ -33,3 +33,9 @@ G = -.5 * h * squareform(mean(p_dist,2)) * h'; %get second moment matrix
 beta = pinv(conMx) * G(:); %Calc betas for contrast matrix
 
 end
+
+
+
+
+
+
