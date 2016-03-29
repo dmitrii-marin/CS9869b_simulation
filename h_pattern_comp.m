@@ -27,7 +27,7 @@ end
 
 %% Calc 2nd moment matrix
 h = eye(nCond)-ones(nCond)/nCond; %centering matrix
-G = -.5 * h * squareform(mean(p_dist,2)) * h'; %get second moment matrix
+G = -.5 * h * squareform(mean(p_dist,2)) * h'; %get (double centered) second moment matrix
 
 %% Calc betas
 beta = pinv(conMx) * G(:); %Calc betas for contrast matrix
