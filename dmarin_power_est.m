@@ -22,7 +22,7 @@ for S=1:length(Levels)
 end
 
 %% Plot
-Markers = 'ov^s*';
+Markers = {'' 'o' 'v' '^' 's' '*'};
 
 for W=1:length(Hyp)
     figure(W);
@@ -36,7 +36,7 @@ for W=1:length(Hyp)
             for Int=L
                 [y,x] = ksdensity(Sample{S,T,Int,W});
                 C = [S,T,Int];
-                plot(x,y, ['-' Markers(C(W))]);
+                plot(x,y, ['-' Markers{C(W)}]);
                 Legend = [Legend sprintf('%d%d%d / Power=%g', (S), (T), (Int), Power(S,T,Int,W))];
             end
         end
