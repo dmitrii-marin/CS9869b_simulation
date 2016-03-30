@@ -69,6 +69,8 @@ for i=1:3
     end
 end
 
+pr examples
+
 drawnow;
 
 %% H0

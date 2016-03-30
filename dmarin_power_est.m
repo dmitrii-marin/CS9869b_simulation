@@ -44,15 +44,33 @@ for W=1:length(Hyp)
     hold off
     legend(Legend);
     
+    drawnow;
+    
     pr(sprintf('%s_distributions_%d', dataFile, W));
 end
 
 %%
 
-figure;
-for i = 1:length(Levels)
-    [y,x] = ksdensity(Sample{i,1,1,1});
-    hold on
-    plot(x, y);
-    hold off
+for j=1:length(Hyp)
+
+    figure(length(Hyp) + j);
+    clf;
+    Legend = {};
+    Top = 0;
+    C = {1,1,1,j};
+    for i = 1:length(Levels)
+        C{j} = i;
+        [y,x] = ksdensity(Sample{C{:}});
+        hold on
+        plot(x, y);
+        Top = max([Top; y(:)]);
+        hold off
+        Legend = [Legend sprintf('%.2f/%.2f', Levels(i), Power(C{:}))];
+    end
+    C{j} = 1;
+    CV = Sample{C{:}}(ceil(0.95*length(Sample{C{:}})));
+    line([CV CV], [0 Top], 'Color', 'r');
+    legend([Legend 'critical value 5%']);
+    title(sprintf('Power of Methods w.r.t. SNR [SNR/power]\nRegressor #%d', j));
+    
 end
