@@ -149,12 +149,11 @@ for i = 1:nRep
     
 end
 
+toc
+
 out.m1Class = m1Class;
 out.m2Class = m2Class;
 out.iClass = iClass;
-
-
-toc
 
 
 
