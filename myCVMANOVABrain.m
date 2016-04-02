@@ -44,11 +44,11 @@ function CVT_BLH = myCVMANOVABrain(Y)
     Cond = [Cond Cond(:,2).*Cond(:,4) Cond(:,2).*Cond(:,5) Cond(:,3).*Cond(:,4) Cond(:,3).*Cond(:,5)];
   
    %Perform mfold cross validation
-   if (N-2*g) < p
-        regularization = 0.01;
-   else
-        regularization = 0;
-   end
+%    if (N-2*g) < p
+%         regularization = 0.01;
+%    else
+%         regularization = 0;
+%    end
   
    mfold = m;
    XL  = repmat(Cond,m/mfold,1);

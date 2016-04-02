@@ -9,19 +9,19 @@
 %--------------------------------------------------------------------------------------------------------
 function [T_Wilks,F_Wilks,df1,df2,pF_Wilks] = myMANOVABrain(Y)
     [N,p] = size(Y);
-    g = 9; %the number of conditions
-    if (N-g) < p
-%         disp('-------------------------------------------');
-%         disp('N<=p, 95% Pricipal components are used!');
-%         disp('-------------------------------------------');
-        [COEFF,SCORE,latent] = princomp(Y,'econ');
-        latentProp = cumsum(latent)./sum(latent);
-        ncomp = find(latentProp>0.95);
-        ncomp = ncomp(1);
-%        ncomp = min([ncomp(1),N-g]);
-       Y = SCORE(:,1:ncomp);
-        [N,p] = size(Y);
-    end
+    g = 9; %the number of conditions in the design matrix coded with dummy variables
+%     if (N-g) < p
+% %         disp('-------------------------------------------');
+% %         disp('N<=p, 95% Pricipal components are used!');
+% %         disp('-------------------------------------------');
+%         [COEFF,SCORE,latent] = princomp(Y,'econ');
+%         latentProp = cumsum(latent)./sum(latent);
+%         ncomp = find(latentProp>0.95);
+%         ncomp = ncomp(1);
+% %        ncomp = min([ncomp(1),N-g]);
+%        Y = SCORE(:,1:ncomp);
+%         [N,p] = size(Y);
+%     end
     
     Afull = eye(g); %Hypothesis matrix within subjects
     Afull = {Afull(1,:); Afull(2:3,:) ;Afull(4:5,:) ;Afull(6:9,:)};
@@ -65,6 +65,7 @@ function [T_Wilks,F_Wilks,df1,df2,pF_Wilks] = myMANOVABrain(Y)
         T_Wilks(i) = det(E)/det(H+E);
         
         q = rank(A);
+        %q = rank(A)-1; without intercept
         tmp1 = N-g-0.5*(p-q+1);
         tmp2 = (p*q-2)/4;
         tmp3 = p^2 + q^2 - 5;
