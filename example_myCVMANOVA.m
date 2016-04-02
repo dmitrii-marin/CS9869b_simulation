@@ -1,8 +1,8 @@
 %% Example of the simple CVMANOVA
 %Only the interaction
 [ Y, Z0, U0 ]  = simulate(0,0.3,0,0,...
-                           'sigmaNoise', 1,'nVoxels', 30); 
-
+                           'sigmaNoise', 1,'nVoxels', 150); 
+CVT_BLH = myCVMANOVABrain(Y)
 
 [T_Wilks,FT_Wilks,df1,df2,pF_Wilks] = myMANOVABrain(Y);
 pF_Wilks

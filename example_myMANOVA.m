@@ -1,7 +1,7 @@
 %% Example of the simple MANOVA
 %Only the interaction
 [ Y, Z0, U0 ]  = simulate(0,0.3,0,0,...
-                           'sigmaNoise', 1,'nVoxels', 30); 
+                           'sigmaNoise', 1,'nVoxels', 46); 
 
 
 [T_Wilks,FT_Wilks,df1,df2,pF_Wilks] = myMANOVABrain(Y)
