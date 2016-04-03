@@ -1,7 +1,5 @@
 function dmarin_power_est(dataFile)
 
-addpath ../UWO/Research
-
 load(dataFile);
 
 %% Power estimation
