@@ -1,4 +1,5 @@
 function Score = dmarin_knn2(Y, Transpose)
+% Uses double cross validation
 %%
 Y = reshape(Y, [3, 3, size(Y, 1)/9, size(Y, 2)]);
 Sz = size(Y);
