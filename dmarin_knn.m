@@ -19,7 +19,7 @@ for runid=1:size(Y, 2)
 
         Tr = reshape(Train, [Sz(1)*(Sz(2)-1) Sz(3)]);
         Test = reshape(Y(:,runid,:), [Sz(1) Sz(3)]);
-        Idx = knnsearch(Tr, Test, 'K', 5);
+        Idx = knnsearch(Tr, Test, 'K', 10);
         Classes = Group(Idx);
         Correct = bsxfun(@eq, Classes, Z(:, runid));
         Score = Score + sum(mean(Correct, 2));
