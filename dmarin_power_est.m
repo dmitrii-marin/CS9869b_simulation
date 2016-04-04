@@ -1,7 +1,5 @@
 function dmarin_power_est(dataFile)
 
-addpath ../UWO/Research
-
 load(dataFile);
 
 %% Power estimation
@@ -22,7 +20,9 @@ for S=1:length(Levels)
 end
 
 %% Plot
-Markers = {'' 'o' 'v' '^' 's' '*'};
+H = cell(size(Sample));
+
+Markers = {'' 'v' '^' 'o' 's' '*'};
 
 for W=1:length(Hyp)
     figure(W);
@@ -36,8 +36,8 @@ for W=1:length(Hyp)
             for Int=L
                 [y,x] = ksdensity(Sample{S,T,Int,W});
                 C = [S,T,Int];
-                plot(x,y, ['-' Markers{C(W)}]);
-                Legend = [Legend sprintf('%d%d%d / Power=%g', (S), (T), (Int), Power(S,T,Int,W))];
+                H{S,T,Int,W} = plot(x,y, ['-' Markers{C(W)}]);
+                Legend = [Legend sprintf('%d%d%d / Power=%g', (S>1), (T>1), (Int>1), Power(S,T,Int,W))];
             end
         end
     end
@@ -62,7 +62,10 @@ for j=1:length(Hyp)
         C{j} = i;
         [y,x] = ksdensity(Sample{C{:}});
         hold on
-        plot(x, y);
+        h = plot(x, y);
+        if i == 1
+            set(h, 'LineWidth', 2);
+        end
         Top = max([Top; y(:)]);
         hold off
         Legend = [Legend sprintf('%.2f/%.2f', Levels(i), Power(C{:}))];
