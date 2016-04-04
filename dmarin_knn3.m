@@ -1,4 +1,5 @@
 function Score = dmarin_knn3(Y)
+% Destroys main effects and tests for interaction
 %%
 Y = reshape(Y, [3, 3, size(Y, 1)/9, size(Y, 2)]);
 
