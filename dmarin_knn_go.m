@@ -1,7 +1,5 @@
 clear all; close all
 
-addpath ../UWO/Research/
-
 %% show examples
 
 figure(1); clf;
