@@ -1,0 +1,26 @@
+\begin{thebibliography}{1}
+
+\bibitem{fox2013hypothesis}
+John Fox, Michael Friendly, and Sanford Weisberg.
+\newblock Hypothesis tests for multivariate linear models using the car
+  package.
+\newblock {\em R J}, 5(1):39--52, 2013.
+
+\bibitem{rao1951asymptotic}
+C~Radhakrishna Rao.
+\newblock An asymptotic expansion of the distribution of wilks¡¯ criterion.
+\newblock {\em Bulletin of the International Statistical Institute}, 33(Part
+  2):177--180, 1951.
+
+\bibitem{allefeld2014searchlight}
+Carsten Allefeld and John-Dylan Haynes.
+\newblock Searchlight-based multi-voxel pattern analysis of fmri by
+  cross-validated manova.
+\newblock {\em Neuroimage}, 89:345--357, 2014.
+
+\bibitem{davis2002statistical}
+Charles~S Davis.
+\newblock {\em Statistical methods for the analysis of repeated measurements}.
+\newblock Springer Science \& Business Media, 2002.
+
+\end{thebibliography}
