@@ -1,102 +1,5 @@
-\batchmode
-\makeatletter
-%\def\input@path{{\string"C:/Users/Hao/Dropbox/NewtermPHD/TERM2/SS9833B Analysis of brain imaging data/Report/\string"/}}
-\makeatother
-\documentclass[english]{article}\usepackage[]{graphicx}\usepackage[]{color}
-%% maxwidth is the original width if it is less than linewidth
-%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
-\makeatletter
-\def\maxwidth{ %
-  \ifdim\Gin@nat@width>\linewidth
-    \linewidth
-  \else
-    \Gin@nat@width
-  \fi
-}
-\makeatother
-
-\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
-\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
-\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
-\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
-\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
-\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
-\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
-\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
-\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
-\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
-
-\usepackage{framed}
-\makeatletter
-\newenvironment{kframe}{%
- \def\at@end@of@kframe{}%
- \ifinner\ifhmode%
-  \def\at@end@of@kframe{\end{minipage}}%
-  \begin{minipage}{\columnwidth}%
- \fi\fi%
- \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
- \colorbox{shadecolor}{##1}\hskip-\fboxsep
-     % There is no \\@totalrightmargin, so:
-     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
- \MakeFramed {\advance\hsize-\width
-   \@totalleftmargin\z@ \linewidth\hsize
-   \@setminipage}}%
- {\par\unskip\endMakeFramed%
- \at@end@of@kframe}
-\makeatother
-
-\definecolor{shadecolor}{rgb}{.97, .97, .97}
-\definecolor{messagecolor}{rgb}{0, 0, 0}
-\definecolor{warningcolor}{rgb}{1, 0, 1}
-\definecolor{errorcolor}{rgb}{1, 0, 0}
-\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
-
-\usepackage{alltt}
-\usepackage{ae,aecompl}
-\usepackage[T1]{fontenc}
-\usepackage[latin9]{inputenc}
-\usepackage{geometry}
-\geometry{verbose,tmargin=1.1cm,bmargin=2.2cm,lmargin=2cm,rmargin=2cm}
-\setcounter{tocdepth}{-1}
-\usepackage{color}
-\usepackage{babel}
-\usepackage{float}
-\usepackage{url}
-\usepackage{amsmath}
-\usepackage{fixltx2e}
-\usepackage{graphicx}
-\usepackage[unicode=true,pdfusetitle,
- bookmarks=false,
- breaklinks=true,pdfborder={0 0 1},backref=false,colorlinks=true]
- {hyperref}
-
-\makeatletter
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
-\usepackage{enumitem}		% customizable list environments
-\newlength{\lyxlabelwidth}      % auxiliary length 
-
-\@ifundefined{showcaptionsetup}{}{%
- \PassOptionsToPackage{caption=false}{subfig}}
-\usepackage{subfig}
-\makeatother
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-\begin{document}
-
-\title{Introduction to MANOVA and CV-MANOVA}
-
-
-\author{Yuanhao Lai%
-\thanks{\protect\url{ylai72@uwo.ca}, Department of Statistical and Actuarial
-Sciences, Western University%
-}}
-
-\maketitle
-\vspace{-30bp}
-
-
-
 \section{MANOVA and CVMANOVA}
-
+\label{sec:manova}
 
 \subsection{Model Structure}
 
@@ -217,7 +120,7 @@ distribution for this statistic. So the distribution under $H_{0}$
 of the CV-MANOVA is obtained by either simulations or permutations. 
 
 
-\section{Relationship between CV-MANOVA and RSA}
+\subsection{Relationship between CV-MANOVA and RSA}
 
 It can be shown the CV-MANOVA $D$ is also a linear contrasts of the
 second moment matrix $\hat{G}$. If we ignored a constant scale of
@@ -256,7 +159,7 @@ is involved. From this point of view, we may prefer RSA though they
 should have similar performances.
 
 
-\section{Results}
+\subsection{Results}
 
 For all the statistical tests we performed, we specified type I error
 i as 0.05. So the critical value for each method was obtained as the
@@ -373,9 +276,3 @@ under difference hypotheses.\label{fig:MANOVA-SNR}}
 \centering{}\subfloat{\includegraphics[scale=0.55]{11C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B___aging_data_Report_CVMANOVA_power_regressor1.png}}\subfloat{\includegraphics[scale=0.55]{12C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B___aging_data_Report_CVMANOVA_power_regressor3.png}}\protect\caption{Power v.s. SNR for CVMANOVA \label{fig:CVMANOVA-SNR}}
 \end{figure}
 
-
-\bibliographystyle{unsrt}
-\phantomsection\addcontentsline{toc}{section}{\refname}\nocite{*}
-\bibliography{ref}
-
-\end{document}
