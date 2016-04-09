@@ -167,7 +167,7 @@ i as 0.05. So the critical value for each method was obtained as the
 test).
 
 
-\subsection{Limitation of MANOVA}
+\subsubsection{Limitation of MANOVA}
 
 As we mentioned in Section \ref{sub:MANOVA}, MANOVA fails when $n-k\ge p$.
 To overcome this problem, we introduced two simple methods and used
@@ -183,7 +183,7 @@ the false positive rate and achieves a much higher power. Figure \ref{fig:Explai
 also shows that the explained variances by these components are around
 $70\%$.
 
-\begin{figure}[H]
+\begin{figure}[t]
 \begin{centering}
 \subfloat{\includegraphics[scale=0.55]{0C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B_Analysis_of_brain_imaging_data_Report_MANOVA_Sig.png}}\subfloat{\includegraphics[scale=0.55]{1C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B____s_of_brain_imaging_data_Report_MANOVA_Power.png}}
 \par\end{centering}
@@ -197,8 +197,9 @@ the random error term is 1.}\label{fig:MANOVA1} }
 \end{figure}
 
 
-\begin{figure}[H]
-\centering{}(0 indicates there is ).\subfloat{\includegraphics[scale=0.55]{2C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B____of_brain_imaging_data_Report_MANOVA_PCA_Sig.png}}\subfloat{\includegraphics[scale=0.55]{3C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B_____brain_imaging_data_Report_MANOVA_PCA_Power.png}}\protect\caption{{\footnotesize{}CV-MANOVA using the first $N$ principal components
+\begin{figure}[t]
+\centering{}\subfloat{\includegraphics[scale=0.5]{2C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B____of_brain_imaging_data_Report_MANOVA_PCA_Sig.png}}
+\subfloat{\includegraphics[scale=0.5]{3C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B_____brain_imaging_data_Report_MANOVA_PCA_Power.png}}\protect\caption{{\footnotesize{}CV-MANOVA using the first $N$ principal components
 of voxels: The left figure shows the false positive rates for detecting
 each term from 1000 simulations of random noises. The right figure
 shows the power for detecting each term from 1000 simulations of signals,
@@ -207,13 +208,14 @@ the random error term is 1. ($N=1,\ldots,45$) }{\small{}\label{fig:CV-MANOVA-PCA
 \end{figure}
 
 
-\begin{figure}[H]
-\centering{}\includegraphics[scale=0.55]{4C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B____in_imaging_data_Report_MANOVA_PCA_Variation.png}\protect\caption{Explained Variance of PCA\label{fig:Explained-Variance-of}}
+\begin{figure}[ht]
+\centering{}\includegraphics[scale=0.5]{4C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B____in_imaging_data_Report_MANOVA_PCA_Variation.png}\
+\protect\caption{Explained Variance of PCA\label{fig:Explained-Variance-of}}
 \end{figure}
 
 
 
-\subsection{Power under Different Hypotheses}
+\subsubsection{Power under Different Hypotheses}
 
 To compare the power of different methods under different hypothese,
 we did 1000 simulations under different hypothesis and the results
@@ -231,9 +233,10 @@ unbiased when the data is generated from random noises, but there
 was a drift for the distribution of the spatial pattern when the interaction
 was involved.
 
-\begin{figure}[H]
+\begin{figure}[t]
 \begin{centering}
-\subfloat{\includegraphics[scale=0.55]{5C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B_____imaging_data_Report_MANOVA_dist_regressor1.png}}\subfloat{\includegraphics[scale=0.55]{6C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B_____imaging_data_Report_MANOVA_dist_regressor3.png}}
+\subfloat{\includegraphics[scale=0.5]{5C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B_____imaging_data_Report_MANOVA_dist_regressor1.png}}\
+\subfloat{\includegraphics[scale=0.5]{6C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B_____imaging_data_Report_MANOVA_dist_regressor3.png}}
 \par\end{centering}
 
 \centering{}\protect\caption{MANOVA using the first $28$ principal components under difference
@@ -242,9 +245,10 @@ pattern and the right figure is for the interaction.\label{fig:MANOVA-ss}}
 \end{figure}
 
 
-\begin{figure}[H]
+\begin{figure}[t]
 \begin{centering}
-\subfloat{\includegraphics[scale=0.55]{9C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B____maging_data_Report_CVMANOVA_dist_regressor1.png}}\subfloat{\includegraphics[scale=0.55]{10C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B___maging_data_Report_CVMANOVA_dist_regressor3.png}}
+\subfloat{\includegraphics[scale=0.5]{9C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B____maging_data_Report_CVMANOVA_dist_regressor1.png}}
+\subfloat{\includegraphics[scale=0.5]{10C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B___maging_data_Report_CVMANOVA_dist_regressor3.png}}
 \par\end{centering}
 
 \centering{}\protect\caption{CV-MANOVA under difference hypotheses: the left figure shows the power
@@ -254,7 +258,7 @@ interaction.\label{fig:CVMANOVA-ss}}
 
 
 
-\subsection{Noise Tolerance of MANOVA and CVMANOVA}
+\subsubsection{Noise Tolerance of MANOVA and CVMANOVA}
 
 In order to see how the power of each method is related the signal-noise-ratio
 (SNR), we did 1000 simulations with four different SNR's. The null
@@ -262,7 +266,7 @@ hypothesis for each method was set as random noises. Figure \ref{fig:MANOVA-SNR}
 to Figure \ref{fig:CVMANOVA-SNR} show that the power of each method
 increased dramatically as the SNR increased.
 
-\begin{figure}[H]
+\begin{figure}[t]
 \begin{centering}
 \subfloat{\includegraphics[scale=0.55]{7C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B____imaging_data_Report_MANOVA_power_regressor1.png}}\subfloat{\includegraphics[scale=0.55]{8C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B____imaging_data_Report_MANOVA_power_regressor3.png}}
 \par\end{centering}
@@ -272,7 +276,7 @@ under difference hypotheses.\label{fig:MANOVA-SNR}}
 \end{figure}
 
 
-\begin{figure}[H]
+\begin{figure}[t]
 \centering{}\subfloat{\includegraphics[scale=0.55]{11C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B___aging_data_Report_CVMANOVA_power_regressor1.png}}\subfloat{\includegraphics[scale=0.55]{12C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B___aging_data_Report_CVMANOVA_power_regressor3.png}}\protect\caption{Power v.s. SNR for CVMANOVA \label{fig:CVMANOVA-SNR}}
 \end{figure}
 

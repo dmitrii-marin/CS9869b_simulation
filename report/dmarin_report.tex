@@ -33,6 +33,7 @@
 %\usepackage{subcaption}
 \usepackage{subfig}
 \usepackage[format=plain]{caption}
+\usepackage{placeins}
 
 \graphicspath{{../CliffordReport/}}
 
@@ -89,12 +90,14 @@
 
 Functional magnetic resonance imaging (fMRI) is a procedure that uses MRI in order to measure brain activity via detecting changes in the blood flow in the brain. It has been shown that when a particular area in the brain is in use, blood flow to this area increases\cite{ogawa1990brain,shmuel2002sustained}. Known relation between the neuron activity and blood flow (the hemodynamic function) and regression analysis allow to relate measured fMRI time series with hypothesized stimuli or activity induced processes\cite{huettel2004functional}. The regression coefficients are time independent and indicate the relation between a brain voxel and the studied stimuli or activities. 
 
-This project addresses the problem of two factor analysis of fMRI data. In particular we are interesting in the following questions. Does a part of the brain (represented as a set of voxels) encode information about each of the factors independently or  resemble unique combination of factor levels. Kornysheva and Diedrichsen in \cite{Kornysheva2014} taught volunteers to perform series of finger movements. Each sequence was a combination of three different temporal (temporal factor) and three different spatial (spatial factor) features. They found the regions in the brain that encode each of the factors independently as well as the regions that encode unique features of all possible combinations in the brain. They used classification approach, which we discuss in \autoref{sec:classification}. This project aims to explore and compare different approaches to this problem. In \autoref{sec:manova} we describe classical \emph{multivariate analysis of variation} (manova) and also discuss its cross-validate extension. In \autoref{sec:pcm} we describe pattern component modeling.
+This project addresses the problem of two factor analysis of fMRI data. In particular we are interesting in the following questions. Does a part of the brain (represented as a set of voxels) encode information about each of the factors independently or  resemble unique combination of factor levels. Kornysheva and Diedrichsen in \cite{Kornysheva2014} taught volunteers to perform series of finger movements. Each sequence was a combination of three different temporal (temporal factor) and three different spatial (spatial factor) features. They found the regions in the brain that encode each of the factors independently as well as the regions that encode unique features of all possible combinations in the brain. They used classification approach, which we discuss in \autoref{sec:classification}. This project aims to explore and compare different approaches to this problem. In \autoref{sec:manova} we describe classical \emph{multivariate analysis of variation} (manova) and also discuss its cross-validate extension. In \autoref{sec:pcm} we describe \emph{Pattern Component Modeling}\cite{Walther2016}, which is based on \emph{Representational Similarity Analysis}~\cite{kriegeskorte2008representational}.
 
 \section*{Co-authorship statement}
 Yuanhao Lai wrote \autoref{sec:manova}. Harrison Ritz wrote \autoref{sec:pcm}. 
 
 \input{clifford.tex}
+
+\FloatBarrier
 
 \section{Classification approach}\label{sec:classification}
 
@@ -194,7 +197,7 @@ To overcome this issue \cite{Kornysheva2014} propose to use \emph{double cross v
 \label{fig:test interaction}
 }
 %\end{subfigure}
-\caption{Detection of main effects (a) and interaction (b). For the legend description see \autoref{fig:knn drift}.}
+\caption{Detection of main effects (a) and interaction (b). For the legend description see \autoref{fig:knn drift}. The power is worse than in \autoref{fig:knn convergence} due to smaller training set.}
 \end{figure}
 
 
@@ -204,15 +207,24 @@ To detect interaction  we train a classifier to decode all 9 possible combinatio
 
 \subsection{Results and conclusions}
 
-The classification approach is very powerful technique for decoding the activation patterns. It relies on a very popular and established field of machine learning that allows removing the limitations on the number of voxels and assumption of normality of the data. Our experiments show that the approach allows reliable detection of the main effects and interaction. With SNR level of 0.15 the power of the proposed statistical test (base on average accuracy) reaches the level of $\sim70\%$ for main effect (\autoref{fig:2xval for main effect}) detection and $\sim57\%$ for interaction (\autoref{fig:test interaction}).
+The classification approach is very powerful technique for decoding the activation patterns. It relies on a very popular and established field of machine learning that allows removing the limitations on the number of voxels and assumption of normality of the data. Our experiments show that the approach allows reliable detection of the main effects and interaction. With SNR level of 0.15 the power of the proposed statistical test (base on average accuracy) reaches the level of $\sim70\%$ for main effect (\autoref{fig:2xval for main effect}) detection and $\sim57\%$ for interaction (\autoref{fig:test interaction}). We also show that as SNR increases the power of our statistical test reaches 1 very quickly (\autoref{fig:knn convergence}).
+
+\section{Pattern component modeling}\label{sec:pcm}
 
 \section{Discussion}
 
- - We implemented and compared three different methods
+\begin{figure}[t]
+\centering
+\includegraphics{overall.png}
+\caption{Comparison of different methods. Pattern component modeling (PCM) performs the best.}
+\label{fig:overall}
+\end{figure}
 
- - Limitation of simulation: relies on assumptions about data structure and normality
+In this project we implemented and evaluated three different methods. Those are Multivariate Analysis of Variation (MANOVA), Classification approach and Pattern component modeling (PCM). The comparison is summarized in \autoref{fig:overall}. In our simulation experiments we found that classical MANOVA limitations on the number of voxels can be compensated by PCA dimensionality reduction. The resulting PCA-MANOVA method gives competitive results for main effect detection. Quite general classification approach yields slightly lower power for the main effect detection and outperforms PCA-MANOVA in case of interaction detection. We found out that PCM performs the best among all competitive methods.
 
- - Limitation of methods: didn't explore different classifiers, number of voxels in the manova
+However, there are some limitations of our research. Our simulation procedure assumes normal uncorrelated distribution of activation patterns. Both assumptions (normality and uncorrelatedness) are ideal and hard to achieve in practice. Our implementation of MANOVA and PCM significantly rely on this assumptions. The classification approach does not rely on this assumption. In our work we only evaluated one classifier, namely K Nearest Neighbor classifier. Other, more powerful classifiers might yield better results.
+
+\FloatBarrier
 
 \bibliographystyle{unsrt}
 \bibliography{ref,../CliffordReport/ref}
