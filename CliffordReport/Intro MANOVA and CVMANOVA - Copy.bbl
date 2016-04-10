@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{davis2002statistical}
+Charles~S Davis.
+\newblock {\em Statistical methods for the analysis of repeated measurements}.
+\newblock Springer Science \& Business Media, 2002.
+
 \bibitem{fox2013hypothesis}
 John Fox, Michael Friendly, and Sanford Weisberg.
 \newblock Hypothesis tests for multivariate linear models using the car
@@ -17,10 +22,5 @@ Carsten Allefeld and John-Dylan Haynes.
 \newblock Searchlight-based multi-voxel pattern analysis of fmri by
   cross-validated manova.
 \newblock {\em Neuroimage}, 89:345--357, 2014.
-
-\bibitem{davis2002statistical}
-Charles~S Davis.
-\newblock {\em Statistical methods for the analysis of repeated measurements}.
-\newblock Springer Science \& Business Media, 2002.
 
 \end{thebibliography}

@@ -1,6 +1,6 @@
 \batchmode
 \makeatletter
-%\def\input@path{{\string"C:/Users/Hao/Dropbox/NewtermPHD/TERM2/SS9833B Analysis of brain imaging data/Report/\string"/}}
+\def\input@path{{\string"C:/Users/Hao/Dropbox/NewtermPHD/TERM2/SS9833B Analysis of brain imaging data/Report/\string"/}}
 \makeatother
 \documentclass[english]{article}\usepackage[]{graphicx}\usepackage[]{color}
 %% maxwidth is the original width if it is less than linewidth
@@ -97,12 +97,15 @@ Sciences, Western University%
 
 \section{MANOVA and CVMANOVA}
 
+The method, multivariate analysis of variance (MANOVA) is our method
+to distinguish different patterns as it is the most well-known traditional
+multivariate method for comparing different means\cite{davis2002statistical}.
+
 
 \subsection{Model Structure}
 
-The method, multivariate analysis of variance (MANOVA)\cite{fox2013hypothesis},
-assumes our data are generated from the multivariate general linear
-model (MGLM), 
+MANOVA assumes our data are generated from the multivariate general
+linear model (MGLM) \cite{fox2013hypothesis},, 
 \[
 \underset{\left(n\times p\right)}{\boldsymbol{Y}}=\underset{\left(n\times k\right)}{\boldsymbol{Z}}\underset{\left(k\times p\right)}{\boldsymbol{U}}+\underset{\left(n\times p\right)}{\boldsymbol{E}}
 \]
@@ -295,7 +298,7 @@ the random error term is 1.}\label{fig:MANOVA1} }
 
 
 \begin{figure}[H]
-\centering{}(0 indicates there is ).\subfloat{\includegraphics[scale=0.55]{2C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B____of_brain_imaging_data_Report_MANOVA_PCA_Sig.png}}\subfloat{\includegraphics[scale=0.55]{3C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B_____brain_imaging_data_Report_MANOVA_PCA_Power.png}}\protect\caption{{\footnotesize{}CV-MANOVA using the first $N$ principal components
+\centering{}\subfloat{\includegraphics[scale=0.55]{2C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B____of_brain_imaging_data_Report_MANOVA_PCA_Sig.png}}\subfloat{\includegraphics[scale=0.55]{3C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B_____brain_imaging_data_Report_MANOVA_PCA_Power.png}}\protect\caption{{\footnotesize{}CV-MANOVA using the first $N$ principal components
 of voxels: The left figure shows the false positive rates for detecting
 each term from 1000 simulations of random noises. The right figure
 shows the power for detecting each term from 1000 simulations of signals,
@@ -341,7 +344,7 @@ pattern and the right figure is for the interaction.\label{fig:MANOVA-ss}}
 
 \begin{figure}[H]
 \begin{centering}
-\subfloat{\includegraphics[scale=0.55]{9C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B____maging_data_Report_CVMANOVA_dist_regressor1.png}}\subfloat{\includegraphics[scale=0.55]{10C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B___maging_data_Report_CVMANOVA_dist_regressor3.png}}
+\subfloat{\includegraphics[scale=0.55]{7C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B____maging_data_Report_CVMANOVA_dist_regressor1.png}}\subfloat{\includegraphics[scale=0.55]{8C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B____maging_data_Report_CVMANOVA_dist_regressor3.png}}
 \par\end{centering}
 
 \centering{}\protect\caption{CV-MANOVA under difference hypotheses: the left figure shows the power
@@ -361,7 +364,7 @@ increased dramatically as the SNR increased.
 
 \begin{figure}[H]
 \begin{centering}
-\subfloat{\includegraphics[scale=0.55]{7C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B____imaging_data_Report_MANOVA_power_regressor1.png}}\subfloat{\includegraphics[scale=0.55]{8C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B____imaging_data_Report_MANOVA_power_regressor3.png}}
+\subfloat{\includegraphics[scale=0.55]{9C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B____imaging_data_Report_MANOVA_power_regressor1.png}}\subfloat{\includegraphics[scale=0.55]{10C__Users_Hao_Dropbox_NewtermPHD_TERM2_SS9833B___imaging_data_Report_MANOVA_power_regressor3.png}}
 \par\end{centering}
 
 \centering{}\protect\caption{Power v.s. SNR for MANOVA using the first $28$ principal components
