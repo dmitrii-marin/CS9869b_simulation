@@ -217,7 +217,7 @@ distribution for this statistic. So the distribution under $H_{0}$
 of the CV-MANOVA is obtained by either simulations or permutations. 
 
 
-\section{Relationship between CV-MANOVA and RSA}
+\section{Relationship between CV-MANOVA and Pattern Component Modeling}
 
 It can be shown the CV-MANOVA $D$ is also a linear contrasts of the
 second moment matrix $\hat{G}$. If we ignored a constant scale of
@@ -233,12 +233,12 @@ D & = & \sum_{l=1}^{m}\sum_{h\neq l}\text{trace}\left[\boldsymbol{Q}_{h}^{CV}\le
  & = & \text{trace}\left[\boldsymbol{H}\hat{G}\right],\ \boldsymbol{H}\text{ is idempotent and symmetric}\\
  & = & \sum_{i,j}\boldsymbol{H}_{ij}\hat{G}_{ij}
 \end{eqnarray*}
-Both CV-MANOVA and RSA estimate $\hat{\boldsymbol{U}}$ for all terms
+Both CV-MANOVA and PCM estimate $\hat{\boldsymbol{U}}$ for all terms
 simultaneously, so they have the same $\hat{G}$. Therefore, the equivalence
-between CV-MANOVA and RSA require using the same hypothesis matrix
+between CV-MANOVA and PCM require using the same hypothesis matrix
 $\boldsymbol{H}$ and $Z^{T}Z\approx cI$ , where $c$ is a constant.
 However, $\boldsymbol{H}$ is not necessarily the same for CV-MANOVA
-and RSA. Although $\boldsymbol{H}$ for both methods are based on
+and PCM. Although $\boldsymbol{H}$ for both methods are based on
 the same contrast matrix, the construction procedures from the contrast
 matrix to $\boldsymbol{H}$ are different. For example, if we are
 interested in testing if any of the main effects, the interaction
@@ -246,13 +246,13 @@ and the overall (intercept) effect are significant, then we will have
 four contrast matrices $C_{\text{main 1}}$, $C_{\text{main 2}}$,
 $C_{\text{interaction}}$ and $C_{\text{intercept}}$ and we will
 need four hypothesis matrices based on them. But CV-MANOVA forms four
-$\boldsymbol{H}$'s independently each contrast matrix, while RSA
+$\boldsymbol{H}$'s independently each contrast matrix, while PCM
 forms four $\boldsymbol{H}$'s from the combinations of all contrast
 matrices. If we are only interested in testing $C_{\text{main 1}}$
 and $C_{\text{main 2}}$, then $\boldsymbol{H}$'s formed by the CV-MANOVA
-and RSA will be the same because the $C_{\text{main 1}}$ and $C_{\text{main 2}}$
+and PCM will be the same because the $C_{\text{main 1}}$ and $C_{\text{main 2}}$
 are linearly independent, but this is not true when $C_{\text{interaction}}$
-is involved. From this point of view, we may prefer RSA though they
+is involved. From this point of view, we may prefer PCM though they
 should have similar performances.
 
 
