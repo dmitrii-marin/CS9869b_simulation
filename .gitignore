@@ -1,0 +1,13 @@
+*.asv
+simulate_example.m
+simulate_example.m
+*.mat
+*.dpf
+*.ppt*
+*.aux
+*.blg
+*.bbl
+*.gz
+*.log
+*.out
+*.*~

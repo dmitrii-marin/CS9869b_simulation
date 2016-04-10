@@ -30,8 +30,15 @@
 \usepackage{beramono}
 \usepackage{times}
 \usepackage{hyperref}
-\usepackage{subcaption}
+%\usepackage{subcaption}
+\usepackage{subfig}
 \usepackage[format=plain]{caption}
+
+\graphicspath{{../CliffordReport/}}
+
+\newcommand{\subfigureautorefname}{\figureautorefname}
+
+\allowdisplaybreaks
 
 \lstset{tabsize=2,language=C++,basicstyle=\footnotesize\ttfamily}
 
@@ -86,6 +93,8 @@ This project addresses the problem of two factor analysis of fMRI data. In parti
 
 \section*{Co-authorship statement}
 Yuanhao Lai wrote \autoref{sec:manova}. Harrison Ritz wrote \autoref{sec:pcm}. 
+
+\input{clifford.tex}
 
 \section{Classification approach}\label{sec:classification}
 
@@ -170,15 +179,21 @@ We observe that as we increase the level of interaction the expected cross-valid
 To overcome this issue \cite{Kornysheva2014} propose to use \emph{double cross validation}. See \autoref{fig:patterns}B. Suppose the patterns only contain interaction and there is no main effects. Let's consider the patterns where factor T has the level of Tn. There are three patterns, see lower row in  \autoref{fig:patterns}B. There is a unique structure within this patterns that allows distinguishing between them. How ever the classifier will be able to recognize this structure only if training set contains such combinations of the factors. So, when we test the patterns from factor Tn  we should exclude from the training set the patterns coming from Tn as well, see \autoref{fig:2xval}. This prevents classifier from learning interaction structure while preserves the main effect information, see \autoref{fig:2xval for main effect}.
 
 \begin{figure}[t]
-\begin{subfigure}[t]{0.49\textwidth}
-\includegraphics[width=\textwidth]{sample_knn2_distributions_1}
-\caption{Testing the main effect for the first factor (circle markers) against all possible combinations (without markers) with double cross-validation. The distributions only depend on the presence of the main effect. Note that there is no drift as in \autoref{fig:knn drift}.} \label{fig:2xval for main effect}
-\end{subfigure}%
+%\begin{subfigure}[t]{0.49\textwidth}
+\subfloat[][Testing the main effect for the first factor (circle markers) against all possible combinations (without markers) with double cross-validation. The distributions only depend on the presence of the main effect. Note that there is no drift as in \autoref{fig:knn drift}.]{
+\includegraphics[width=.48\textwidth]{sample_knn2_distributions_1}
+%\caption{Testing the main effect for the first factor (circle markers) against all possible combinations (without markers) with double cross-validation. The distributions only depend on the presence of the main effect. Note that there is no drift as in \autoref{fig:knn drift}.} 
+\label{fig:2xval for main effect}
+%\end{subfigure}
+}
 \hfill
-\begin{subfigure}[t]{0.49\textwidth}
-\includegraphics[width=\textwidth]{sample_knn2_distributions_3}
-\caption{Testing interaction (circle markers) against all possible combinations (without markers). The distributions only depend on the presence of the interaction.} \label{fig:test interaction}
-\end{subfigure}
+%\begin{subfigure}[t]{0.49\textwidth}
+\subfloat[][Testing interaction (circle markers) against all possible combinations (without markers). The distributions only depend on the presence of the interaction.]{
+\includegraphics[width=.48\textwidth]{sample_knn2_distributions_3}
+%\caption{Testing interaction (circle markers) against all possible combinations (without markers). The distributions only depend on the presence of the interaction.} 
+\label{fig:test interaction}
+}
+%\end{subfigure}
 \caption{Detection of main effects (a) and interaction (b). For the legend description see \autoref{fig:knn drift}.}
 \end{figure}
 
@@ -197,9 +212,9 @@ The classification approach is very powerful technique for decoding the activati
 
  - Limitation of simulation: relies on assumptions about data structure and normality
 
- - Limitation of methods: didn't explore different classifiers.
+ - Limitation of methods: didn't explore different classifiers, number of voxels in the manova
 
 \bibliographystyle{unsrt}
-\bibliography{ref}
+\bibliography{ref,../CliffordReport/ref}
 
 \end{document}
