@@ -1,4 +1,9 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{davis2002statistical}
+Charles~S Davis.
+\newblock {\em Statistical methods for the analysis of repeated measurements}.
+\newblock Springer Science \& Business Media, 2002.
 
 \bibitem{fox2013hypothesis}
 John Fox, Michael Friendly, and Sanford Weisberg.
@@ -18,9 +23,59 @@ Carsten Allefeld and John-Dylan Haynes.
   cross-validated manova.
 \newblock {\em Neuroimage}, 89:345--357, 2014.
 
-\bibitem{davis2002statistical}
-Charles~S Davis.
-\newblock {\em Statistical methods for the analysis of repeated measurements}.
-\newblock Springer Science \& Business Media, 2002.
+\bibitem{waltherrepresentational}
+Alexander Walther, Naveed Ejaz, Nikolaus Kriegeskorte, J{\"o}rn Diedrichsen,
+  and J{\"o}rn Diedrichsen.
+\newblock Representational fmri analysis: an introductory tutorial.
+
+\bibitem{haxby2012multivariate}
+James~V Haxby.
+\newblock Multivariate pattern analysis of fmri: the early beginnings.
+\newblock {\em Neuroimage}, 62(2):852--855, 2012.
+
+\bibitem{walther2015reliability}
+Alexander Walther, Hamed Nili, Naveed Ejaz, Arjen Alink, Nikolaus Kriegeskorte,
+  and J{\"o}rn Diedrichsen.
+\newblock Reliability of dissimilarity measures for multi-voxel pattern
+  analysis.
+\newblock {\em NeuroImage}, 2015.
+
+\bibitem{kornysheva2014human}
+Katja Kornysheva and J{\"o}rn Diedrichsen.
+\newblock Human premotor areas parse sequences into their spatial and temporal
+  features.
+\newblock {\em Elife}, 3:e03043, 2014.
+
+\bibitem{ogawa1990brain}
+Seiji Ogawa, Tso-Ming Lee, Alan~R Kay, and David~W Tank.
+\newblock Brain magnetic resonance imaging with contrast dependent on blood
+  oxygenation.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  87(24):9868--9872, 1990.
+
+\bibitem{shmuel2002sustained}
+Amir Shmuel, Essa Yacoub, Josef Pfeuffer, Pierre-Francois Van~de Moortele,
+  Gregor Adriany, Xiaoping Hu, and Kamil Ugurbil.
+\newblock Sustained negative bold, blood flow and oxygen consumption response
+  and its coupling to the positive response in the human brain.
+\newblock {\em Neuron}, 36(6):1195--1210, 2002.
+
+\bibitem{huettel2004functional}
+Scott~A Huettel, Allen~W Song, and Gregory McCarthy.
+\newblock {\em Functional magnetic resonance imaging}, volume~1.
+\newblock Sinauer Associates Sunderland, 2004.
+
+\bibitem{haxby2001distributed}
+James~V Haxby, M~Ida Gobbini, Maura~L Furey, Alumit Ishai, Jennifer~L Schouten,
+  and Pietro Pietrini.
+\newblock Distributed and overlapping representations of faces and objects in
+  ventral temporal cortex.
+\newblock {\em Science}, 293(5539):2425--2430, 2001.
+
+\bibitem{kriegeskorte2008representational}
+Nikolaus Kriegeskorte, Marieke Mur, and Peter~A Bandettini.
+\newblock Representational similarity analysis-connecting the branches of
+  systems neuroscience.
+\newblock {\em Frontiers in systems neuroscience}, 2:4, 2008.
 
 \end{thebibliography}
