@@ -1,6 +1,6 @@
 
 This section follows the ideas presented in~\cite{Kornysheva2014}. 
-Generally, we are to determine how different the reaction of voxels to different combinations of conditions. 
+Generally, we are to measure the difference in reactions of voxels to different combinations of conditions. 
 Machine learning studies different algorithms that are able to find regularities within object's features in order to extract some information about the object. In particular, classification problem is to train a classifier, a function that maps features of the object to the class that this object belongs to. 
 
 \subsection{K-Nearest-Neighbors (KNN) classifier}
@@ -18,15 +18,15 @@ Machine learning studies different algorithms that are able to find regularities
 
 One of the simple classifiers is \emph{ K-Nearest-Neighbors} (KNN) classifier, see \autoref{fig:knn_example}.
 Given feature vector $x$ and training set $Tr=(\{x_i\},\{c_i\})$ a classical KNN classifier predicts classification label $c$ such that 
-$$c^*(x)\;\; := \;\; \arg\max_y \#\{i : x_i \in knn(Tt,x) \;\&\; c_i=y \}$$ where $knn(Tr,x)$ is the set of $K$ nearest neighbors of vector $x$ from the set $\{x_i\}$. The classifier can be used to produce a confidence measure $conf(x,c,Tr)$ that shows the likelihood of test vector $x$ belonging to class $c$:
- $$ conf(x,c,Tr) \;\; := \;\; \frac{\#\{i : x_i \in knn(T,x) \;\&\; c_i=y \}}{K}. $$ The value of $conf(x,c,Tr)$ reaches its maximum value of $1$ if all K nearest neighbors are from class $c$. %$conf(x,c)$ generates a soft score of class $c$ given feature vector $x$.
+$$c^*(x)\;\; := \;\; \arg\max_y \#\{i : x_i \in knn(Tr,x) \;\&\; c_i=y \}$$ where $knn(Tr,x)$ is the set of $K$ nearest neighbors of vector $x$ from the set $\{x_i\}$. The classifier can be used to produce a confidence measure $conf(x,c,Tr)$ that shows the likelihood of test vector $x$ belonging to class $c$:
+ $$ conf(x,c,Tr) \;\; := \;\; \frac{\#\{i : x_i \in knn(Tr,x) \;\&\; c_i=y \}}{K}. $$ The value of $conf(x,c,Tr)$ reaches its maximum value of $1$ if all K nearest neighbors are from class $c$. %$conf(x,c)$ generates a soft score of class $c$ given feature vector $x$.
 
-Given test dataset $R=(\{x'_i\},\{c'_i\})$ where $x'_i$ are feature vectors and $y'_i$ are true class labels, we define the average accuracy (AC) of classification as 
+Given test dataset $R=(\{x'_i\},\{c'_i\})$ where $\{x'_i\}$ are feature vectors and $\{c'_i\}$ are true class labels, we define the average accuracy (AC) of classification as 
 \begin{equation}
-AC(R,Tr) \;\; := \;\; \frac1{|R|}\sum_i conf(x'_i, c'_i,R).
+AC(R,Tr) \;\; := \;\; \frac1{|R|}\sum_i conf(x'_i, c'_i,Tr).
 \label{eq:ac}
 \end{equation}
-Note that $AC(Tr)$ is en estimator of probability of correct classification. If accuracy is close to 1 the classifier is able to distinguish feature vectors coming from different classes. That means that features~$x_i$ contain a lot of information about classes $c_i$ they originate from. On the other hand, if features~$x_i$ do not contain relevant information about class $c_i$ the classifier will not be able to predict correct class better than random guessing\footnote{It is in case of balanced data, i.e. the number of representatives of different classes is the same in the training set.}. In this case the accuracy will be $\frac1{|C|}$ where $|C|$ is the number of different classes. 
+Note that $AC(R,Tr)$ is an estimator of the probability of correct classification. If accuracy is close to 1 the classifier is able to distinguish feature vectors coming from different classes. That means that features~$x_i$ contain a lot of information about classes $c_i$ they originate from. On the other hand, if features~$x_i$ do not contain relevant information about class $c_i$ the classifier will not be able to predict correct class better than random guessing\footnote{It is in case of balanced data, i.e. the number of representatives of different classes is the same in the training set.}. In this case the accuracy will be $\frac1{|C|}$ where $|C|$ is the number of different classes. 
 
 \subsection{Cross-validation}
 
@@ -69,20 +69,20 @@ We observe that as we increase the level of interaction the expected cross-valid
 \caption{Two factors have 3 levels: S1,S2,S3 and T1,T2,T3. All possible combination of levels result in 9 measured activation patterns ({\bf A}). Double cross-validation allows to decode the main effects ({\bf B} and {\bf C}) independently from interaction. Mean subtraction for both factors allows to destroy their main effects and detect only interaction ({\bf D}). The plot is by~\cite{Kornysheva2014}}\label{fig:patterns}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[p]
 \centering
-\begin{minipage}[c]{0.6\textwidth}
+\begin{minipage}[c]{0.5\textwidth}
 \centering
-\includegraphics[width=.6\textwidth]{2xval.png}
+\includegraphics[width=.7\textwidth]{2xval.png}
 \end{minipage}\hfill
-\begin{minipage}[c]{0.4\textwidth}
+\begin{minipage}[c]{0.5\textwidth}
 \caption{Double cross validation for detecting the main effect of the spatial factor. Suppose one tests a classifier on  patterns that have the temporal factor level of Tn (marked by word test on the plot) and originate from run $i$ (green box on the plot). Then the classifier should be trained on the rest of the patterns except the patterns with the same temporal level Tn or from run $i$ (blue box on the plot).}\label{fig:2xval}
 \end{minipage}
 \end{figure}
 
 To overcome this issue \cite{Kornysheva2014} propose to use \emph{double cross validation}. See \autoref{fig:patterns}B. Suppose the patterns only contain interaction and there is no main effects. Let's consider the patterns where factor T has the level of Tn. There are three patterns, see lower row in  \autoref{fig:patterns}B. There is a unique structure within this patterns that allows distinguishing between them. How ever the classifier will be able to recognize this structure only if training set contains such combinations of the factors. So, when we test the patterns from factor Tn  we should exclude from the training set the patterns coming from Tn as well, see \autoref{fig:2xval}. This prevents classifier from learning interaction structure while preserves the main effect information, see \autoref{fig:2xval for main effect}.
 
-\begin{figure}[t]
+\begin{figure}[p]
 %\begin{subfigure}[t]{0.49\textwidth}
 \subfloat[][Testing the main effect for the first factor (circle markers) against all possible combinations (without markers) with double cross-validation. The distributions only depend on the presence of the main effect. Note, there is no drift as in \autoref{fig:knn drift}.]{
 \includegraphics[width=.48\textwidth,clip=true,trim=0 0 0 7.5mm]{sample_knn2_distributions_1}
@@ -98,7 +98,7 @@ To overcome this issue \cite{Kornysheva2014} propose to use \emph{double cross v
 \label{fig:test interaction}
 }
 %\end{subfigure}
-\caption{Detection of main effects (a) and interaction (b). Estimated distributions of average accuracy \eqref{eq:ac} are shown. For the legend description see \autoref{fig:knn drift}. The power is worse than in \autoref{fig:knn convergence} due to smaller training set.}
+\caption{Detection of main effects (a) and interaction (b). Estimated distributions of statistic \eqref{eq:ac} are shown. The legend is described in \autoref{fig:knn drift}. The power is worse than in \autoref{fig:knn convergence} due to smaller training set.}
 \end{figure}
 
 
@@ -108,7 +108,7 @@ To detect interaction  we train a classifier to decode all 9 possible combinatio
 
 \subsection{Results and conclusions}
 
-\begin{figure}[t]
+\begin{figure}[p]
 \subfloat[][Main effect detection with double cross-validation. The power converges to 1 as SNR increases.]{
 \includegraphics[width=.48\textwidth,clip=true,trim=0 0 0 8mm]{sample_knn2_conv_1}
 \label{fig:knn2 convergence:main}
@@ -122,4 +122,4 @@ To detect interaction  we train a classifier to decode all 9 possible combinatio
 \label{fig:knn2 convergence}
 \end{figure}
 
-The classification approach is a very powerful technique for decoding the activation patterns. It relies on a very popular and established field of machine learning that allows removing the limitations on the number of voxels and assumption of normality of the data. Our experiments show that the approach allows reliable detection of the main effects and interaction. With SNR level of 0.15 the power of the proposed statistical test (base on average accuracy) reaches the level of $\sim71\%$ for main effect detection (\autoref{fig:knn2 convergence:main}) and $\sim57\%$ for interaction (\autoref{fig:knn2 convergence:int}). We also show that as SNR increases the power of our statistical test reaches 1 very quickly (\autoref{fig:knn convergence}). We also show that the proposed statistic~\eqref{eq:ac} coupled with double cross-validation for main effect and mean subtraction for interaction detection is always unbiased in all combinations of factors, see \autoref{fig:2xval for main effect} and  \autoref{fig:test interaction}.
+The classification approach is a very powerful technique for decoding the activation patterns. It relies on a very popular and established field of machine learning that allows removing the limitations on the number of voxels and assumption of normality of the data. Our experiments show that the approach allows reliable detection of the main effects and interaction. With SNR level of 0.15 the power of the proposed statistical test (base on average accuracy) reaches the level of $\sim71\%$ for main effect detection (\autoref{fig:knn2 convergence:main}) and $\sim57\%$ for interaction (\autoref{fig:knn2 convergence:int}). We also show that as SNR increases the power of our statistical test reaches 1 very quickly (\autoref{fig:knn convergence}). We also show that the proposed statistic~\eqref{eq:ac} coupled with double cross-validation for main effect and mean subtraction for interaction detection is always unbiased in all combinations of factors, see \cref{fig:2xval for main effect,fig:test interaction}.

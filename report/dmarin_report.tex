@@ -34,10 +34,12 @@
 \usepackage{subfig}
 \usepackage[format=plain]{caption}
 \usepackage{placeins}
+\usepackage{cleveref}
 
-\graphicspath{{../CliffordReport/}}
+\graphicspath{{../CliffordReport/}{../HarrisonMethod/}}
 
 \newcommand{\subfigureautorefname}{\figureautorefname}
+\renewcommand{\autoref}[1]{\cref{#1}}
 
 \allowdisplaybreaks
 
@@ -86,14 +88,35 @@
 
 \maketitle % Print the title
 
-\section*{Introduction}
+\begin{abstract}
 
-Functional magnetic resonance imaging (fMRI) is a procedure that uses MRI in order to measure brain activity via detecting changes in the blood flow in the brain. It has been shown that when a particular area in the brain is in use, blood flow to this area increases\cite{ogawa1990brain,shmuel2002sustained}. Known relation between the neuron activity and blood flow (the hemodynamic function) and regression analysis allow to relate measured fMRI time series with hypothesized stimuli or activity induced processes\cite{huettel2004functional}. The regression coefficients are time independent and indicate the relation between a brain voxel and the studied stimuli or activities. 
+Functional magnetic resonance imaging (fMRI) is a procedure that uses MRI in order to measure brain activity via detecting changes in the blood flow in the brain. It has been shown that when a particular area in the brain is in use, blood flow to this area increases\cite{ogawa1990brain,shmuel2002sustained}. Known relation between the neuron activity and blood flow (the hemodynamic function) and regression analysis allow to relate measured fMRI time series with hypothesized stimuli or activity induced processes\cite{huettel2004functional}.  %The regression coefficients are time independent and indicate the relation between a brain voxel and the studied stimuli or activities. 
+This allows to find a particular region of the brain responsible for studied activity or stimuli. Recently researches addressed a problem of interaction between different stimuli or activity. This is known as \emph{multiple factor analysis}.
 
-This project addresses the problem of two factor analysis of fMRI data. In particular we are interesting in the following questions. Does a part of the brain (represented as a set of voxels) encode information about each of the factors independently or  resemble unique combination of factor levels. Kornysheva and Diedrichsen in \cite{Kornysheva2014} taught volunteers to perform series of finger movements. Each sequence was a combination of three different temporal (temporal factor) and three different spatial (spatial factor) features. They found the regions in the brain that encode each of the factors independently as well as the regions that encode unique features of all possible combinations in the brain. They used classification approach, which we discuss in \autoref{sec:classification}. This project aims to explore and compare different approaches to this problem. In \autoref{sec:manova} we describe classical \emph{multivariate analysis of variation} (manova) and also discuss its cross-validate extension. In \autoref{sec:pcm} we describe \emph{Pattern Component Modeling}\cite{Walther2016}, which is based on \emph{Representational Similarity Analysis}~\cite{kriegeskorte2008representational}.
+This project addresses the problem of two factor analysis of fMRI data. In particular we are interesting in the following questions. Does a part of the brain (represented as a set of voxels) encode information about each of the factors independently or  resemble unique combination of factor levels. Kornysheva and Diedrichsen in \cite{Kornysheva2014} identified brain regions that are responsible for spatial or temporal features of finger move sequences. They also identified regions that had activation patterns decoding unique combinations of the features. They used classification approach. This project aims to explore and compare different approaches to this problem. We study classical \emph{multivariate analysis of variation} (manova) and also its cross-validate extension. We also explore \emph{Pattern Component Modeling}\cite{Walther2016}, which is based on \emph{Representational Similarity Analysis}~\cite{kriegeskorte2008representational}. We compare all three methods.
+
+
+\end{abstract}
+
+\newpage
 
 \section*{Co-authorship statement}
-Yuanhao Lai wrote \autoref{sec:manova}. Harrison Ritz wrote \autoref{sec:pcm}. 
+Yuanhao Lai wrote \cref{sec:manova}. Harrison Ritz wrote \cref{sec:pcm}. 
+
+\section*{Introduction}
+
+ Kornysheva and Diedrichsen in \cite{Kornysheva2014} taught volunteers to perform series of finger movements. Each sequence was a combination of three different temporal (temporal factor) and three different spatial (spatial factor) features. They found the regions in the brain that encode each of the factors independently as well as the regions that encode unique features of all possible combinations in the brain. 
+
+They used search light technique to mark the brain map. Whole set of voxels were divided into overlapping densely placed groups of 160 voxels. The factorial analysis was performed on each of the groups independently. To study different methods for factorial analysis we decided to conduct simulation experiments. We assume that our activation patterns $Y$ comes from the following model
+\begin{equation}\tag{*}
+\underset{\left(n\times p\right)}{Y}=\underset{\left(n\times k\right)}{Z}\underset{\left(k\times p\right)}{U}+\underset{\left(n\times p\right)}{E}
+\label{eq:sim}
+\end{equation}
+where $Y$ is activation patterns of size 9x160 (9 combinations of factors for 160 voxels), $Z$ is a design matrix of size 9x15 (for each of 9 combinations defines that effects are present, there are 6 main effects and 9 interaction patterns), $U$ is a matrix of size 15x160 that shows the \emph{signal-to-noise-ratio} (SNR) for each of the effects at each voxel, $E$ is i.i.d. noise. 
+
+In our experiments we fix the noise covariance matrix $cov(E)=I$. In our design equation \eqref{eq:sim} we generate each element of $U$ matrix as i.i.d normal noise. Within a row the standard deviation is fixed to a desired SNR of the corresponding effect (main or interaction). We assume that there are 6 independent runs of the experiment. This yields an activation matrix of size 54x160, which for simplicity we will refer to as $Y$.
+
+The rest of the paper is organized as follows. \Cref{sec:manova} describes classical MANOVA approach and also discusses its cross-validation extension. \Cref{sec:classification} describes the original classification approach. \Cref{sec:pcm} describes a recent pattern component modeling approach. \Cref{sec:manova,sec:classification,sec:pcm} also provide the result of our simulation tests. \Cref{sec:discussion} summarizes the results.
 
 \input{clifford.tex} 
 
@@ -105,11 +128,15 @@ Yuanhao Lai wrote \autoref{sec:manova}. Harrison Ritz wrote \autoref{sec:pcm}.
 
 \section{Pattern component modeling}\label{sec:pcm}
 
-\section{Discussion}
+\input{harrison.tex}
 
-\begin{figure}[t]
+\FloatBarrier
+
+\section{Discussion}\label{sec:discussion}
+
+\begin{figure}[ht]
 \centering
-\includegraphics{overall.png}
+\includegraphics[width=0.5\textwidth]{overall.png}
 \caption{Comparison of different methods. Pattern component modeling (PCM) performs the best.}
 \label{fig:overall}
 \end{figure}
@@ -121,6 +148,6 @@ However, there are some limitations of our research. Our simulation procedure as
 \FloatBarrier
 
 \bibliographystyle{unsrt}
-\bibliography{ref,../CliffordReport/ref}
+\bibliography{ref,../CliffordReport/ref,../HarrisonMethod/ref}
 
 \end{document}
